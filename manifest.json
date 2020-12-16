@@ -1,0 +1,11 @@
+{
+  "name": "Shop",
+  "version": "0.1",
+  "type": "module",
+  "class": "workspace\\modules\\Shop\\Shop",
+  "description": "Shop module",
+  "configFile": "config/Shop.php",
+  "routFile": "routing/rout.php",
+  "migrationPath": "console/migrations",
+  "relations": ""
+}
