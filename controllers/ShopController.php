@@ -1,20 +1,18 @@
 <?php
 
-
-namespace workspace\modules\Shop\controllers;
-
+namespace workspace\modules\shop\controllers;
 
 use core\App;
 use core\Controller;
-use workspace\modules\Shop\models\Category;
-use workspace\modules\Shop\models\Product;
+use workspace\modules\shop\models\Category;
+use workspace\modules\shop\models\Product;
 
 class ShopController extends Controller
 {
     protected function init()
     {
-        $this->viewPath = '/modules/Shop/views/';
-        $this->layoutPath = '/modules/Shop/views/';
+        $this->viewPath = '/modules/shop/views/';
+        $this->layoutPath = '/modules/shop/views/';
         $categories = Category::all()->toArray();
         $this->view->tpl->assign('categories', $categories);
     }
@@ -34,12 +32,6 @@ class ShopController extends Controller
             'totalProducts' => $totalProducts,
             'page' => $page,
         ]);
-    }
-
-    public function actionView($id)
-    {
-        $product = Product::where('id', $id)->first();
-        return $this->render('Shop/view.tpl', ['product' => $product]);
     }
 
     public function setOptions($data)
@@ -63,4 +55,5 @@ class ShopController extends Controller
                 'class-control' => '',
             ]
         ];
-    }}
+    }
+}

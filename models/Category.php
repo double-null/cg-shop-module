@@ -1,15 +1,15 @@
 <?php
 
-
-namespace workspace\modules\Shop\models;
-
+namespace workspace\modules\shop\models;
 
 use Illuminate\Database\Eloquent\Model;
-use workspace\modules\Categories\requests\CategorySearchRequest;
+use workspace\modules\shop\requests\CategorySearchRequest;
 
 class Category extends Model
 {
     protected $table = "categories";
+
+    public $timestamps = false;
 
     public $fillable = ['name', 'link', 'scanned'];
 
@@ -22,10 +22,6 @@ class Category extends Model
         $this->save();
     }
 
-    /**
-     * @param CategorySearchRequest $request
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
     public static function search(CategorySearchRequest $request)
     {
         $query = self::query();

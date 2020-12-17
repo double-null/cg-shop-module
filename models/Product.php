@@ -1,15 +1,17 @@
 <?php
 
 
-namespace workspace\modules\Shop\models;
+namespace workspace\modules\shop\models;
 
 
 use Illuminate\Database\Eloquent\Model;
-use workspace\modules\Products\requests\ProductSearchRequest;
+use workspace\modules\shop\requests\ProductSearchRequest;
 
 class Product extends Model
 {
     protected $table = "products";
+
+    public $timestamps = false;
 
     public $fillable = ['mark', 'name', 'description', 'parameters', 'photo', 'price'];
 
