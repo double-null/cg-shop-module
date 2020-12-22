@@ -16,7 +16,25 @@ App::$collector->group(['before' => 'auth'], function ($router){
 
 App::$collector->group(['before' => 'auth'], function ($router){
     App::$collector->group(['prefix' => 'admin'], function ($router) {
+
         App::$collector->gridView('products', ['workspace\modules\shop\controllers\ProductController']);
+
+        App::$collector->post('/product_photo/load', [
+            'workspace\modules\shop\controllers\ProductPhotoController', 'actionLoad',
+        ]);
+
+        App::$collector->post('/product_photo/delete', [
+            'workspace\modules\shop\controllers\ProductPhotoController', 'actionDelete',
+        ]);
+
+        App::$collector->post('/product_photo', [
+            'workspace\modules\shop\controllers\ProductPhotoController', 'actionIndex',
+        ]);
+
+        App::$collector->post('/parameters/list', [
+            'workspace\modules\shop\controllers\ParameterController', 'actionGetProductParams',
+        ]);
+
     });
 });
 

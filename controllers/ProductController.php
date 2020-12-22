@@ -3,10 +3,9 @@
 
 namespace workspace\modules\shop\controllers;
 
-
 use core\App;
 use core\Controller;
-use workspace\modules\shop\models\Product;
+use workspace\modules\shop\models\{Product, Category, ProductParameter};
 use workspace\modules\shop\requests\ProductSearchRequest;
 
 class ProductController extends Controller
@@ -17,22 +16,20 @@ class ProductController extends Controller
         $this->layoutPath = App::$config['adminLayoutPath'];
         App::$breadcrumbs->addItem(['text' => 'AdminPanel', 'url' => 'adminlte']);
         App::$breadcrumbs->addItem(['text' => 'Product', 'url' => 'admin/products']);
+        $this->view->registerJs('/workspace/modules/shop/resources/js/custom.js', [], true);
     }
 
     public function actionIndex()
     {
         $request = new ProductSearchRequest();
         $model = Product::search($request);
-
         return $this->render('products/index.tpl', ['h1' => 'Product', 'options' => $this->setOptions($model)]);
     }
 
     public function actionView($id)
     {
         $model = Product::where('id', $id)->first();
-
         $options = $this->setOptions($model);
-
         return $this->render('products/view.tpl', ['model' => $model, 'options' => $options]);
     }
 
@@ -50,13 +47,34 @@ class ProductController extends Controller
     public function actionEdit($id)
     {
         $model = Product::where('id', $id)->first();
-
         if($this->validation()) {
             $model->_save();
+            if (!empty($_POST['Params'])) {
+                foreach ($_POST['Params'] as $param => $value) {
+                    ProductParameter::where('parameter_id', $param)
+                        ->where('product_id', $id)
+                        ->update(['value' => $value]);
+                }
+            }
 
+            if (!empty($_POST['NewParam'])) {
+                foreach ($_POST['NewParam'] as $key => $paramId) {
+                    if ($_POST['NewParamValue'][$key]) {
+                        ProductParameter::insert([
+                            'product_id' => $id,
+                            'parameter_id' => $paramId,
+                            'value' => $_POST['NewParamValue'][$key],
+                        ]);
+                    }
+                }
+            }
             $this->redirect('admin/products');
-        } else
-            return $this->render('products/edit.tpl', ['h1' => 'Редактировать: ', 'model' => $model]);
+        } else {
+            return $this->render('products/edit.tpl', [
+                'model' => $model,
+                'categories' => Category::all(),
+            ]);
+        }
     }
 
     public function actionDelete()
@@ -75,7 +93,6 @@ class ProductController extends Controller
                 'mark' => 'Mark',
                 'name' => 'Name',
                 'description' => 'Description',
-                'parameters' => 'Parameters',
                 'photo' => 'Photo',
                 'price' => 'Price',
             ],
@@ -85,6 +102,6 @@ class ProductController extends Controller
 
    public function validation()
    {
-       return (isset($_POST["category_id"]) && isset($_POST["mark"]) && isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["parameters"]) && isset($_POST["photo"]) && isset($_POST["price"])) ? true : false;
+       return (isset($_POST["category_id"]) && isset($_POST["mark"]) && isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["price"])) ? true : false;
    }
 }

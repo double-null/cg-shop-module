@@ -11,14 +11,13 @@ class ProductParameter extends Model
 
     public $timestamps = false;
 
-    public $fillable = ['product_id', 'parametr_id', 'value'];
+    public $fillable = ['product_id', 'parameter_id', 'value'];
 
     public function _save()
     {
-            $this->product_id = $_POST["product_id"];
-            $this->parametr_id = $_POST["parametr_id"];
-            $this->value = $_POST["value"];
-
+        $this->product_id = $_POST["product_id"];
+        $this->parameter_id = $_POST["parameter_id"];
+        $this->value = $_POST["value"];
         $this->save();
     }
 
@@ -32,13 +31,18 @@ class ProductParameter extends Model
         if($request->product_id)
             $query->where('product_id', 'LIKE', "%$request->product_id%");
 
-        if($request->parametr_id)
-            $query->where('parametr_id', 'LIKE', "%$request->parametr_id%");
+        if($request->parameter_id)
+            $query->where('parametr_id', 'LIKE', "%$request->parameter_id%");
 
         if($request->value)
             $query->where('value', 'LIKE', "%$request->value%");
 
-
         return $query->get();
     }
+
+    public function parameter()
+    {
+        return $this->belongsTo(Parameter::class, 'parameter_id', 'id');
+    }
+
 }

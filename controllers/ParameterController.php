@@ -61,6 +61,12 @@ class ParameterController extends Controller
         Parameter::where('id', $_POST['id'])->delete();
     }
 
+    public function actionGetProductParams()
+    {
+        echo json_encode(Parameter::all()->toArray());
+        die;
+    }
+
     public function setOptions($data)
     {
         return [

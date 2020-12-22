@@ -11,8 +11,6 @@ class ProductSearchRequest extends RequestSearch
     public $mark;
     public $name;
     public $description;
-    public $parameters;
-    public $photo;
     public $price;
 
 

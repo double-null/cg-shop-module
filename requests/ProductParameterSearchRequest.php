@@ -8,7 +8,7 @@ class ProductParameterSearchRequest extends RequestSearch
 {
     public $id;
     public $product_id;
-    public $parametr_id;
+    public $parameter_id;
     public $value;
 
 

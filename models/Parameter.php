@@ -41,4 +41,9 @@ class Parameter extends Model
 
         return $query->get();
     }
+
+    public function productParameters()
+    {
+        return $this->belongsToMany('\modules\shop\models\ProductParameter');
+    }
 }

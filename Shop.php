@@ -23,12 +23,8 @@ class Shop
                         'url' => '/admin/products',
                     ],
                     [
-                        'title' => 'Список характеристик',
+                        'title' => 'Характеристики',
                         'url' => '/admin/parameters',
-                    ],
-                    [
-                        'title' => 'Характеристики товаров',
-                        'url' => '/admin/product_parameters',
                     ],
                 ],
             ],
