@@ -65,27 +65,23 @@ $(document).on('click', '.delete-photo', function(e){
 $(document).on('click', '.add-param', function (e){
     var product = $(this).data('product');
     $.post('/admin/parameters/list', {'product':product}, function (data){
-        console.log(data);
         var options = '';
         $.each(data, function (){
             options += '<option value="'+this.id+'">'+this.name+'</option>';
         });
-
-        let out = '<div class="form-group">';
-        out += '<div class="row">';
+        let out = '<div class="form-group row param-item">';
         out += '<div class="col-6">';
         out += '<label>Новый параметр:</label>';
         out += '<select class="form-control" name="NewParam[]">'+options+'</select>';
         out += '</div>';
         out += '<div class="col-5">'
-        out += '<label>Новый параметр:</label>';;
+        out += '<label>Новое значение:</label>';
         out += '<input type="text" id="photo" class="form-control" name="NewParamValue[]" value="" />';
         out += '</div>';
         out += '<div class="col-1">';
-        out += '<a class="custom-link" href="#">';
+        out += '<a class="custom-link delete-param" data-fake="1" href="#">';
         out += '<i class="nav-icon fas fa-trash"></i>';
         out += '</a>';
-        out += '</div>';
         out += '</div>';
         out += '</div>';
         $('#product-params-list').append(out);
@@ -93,3 +89,19 @@ $(document).on('click', '.add-param', function (e){
     e.preventDefault();
 });
 
+// Удаление характеристик товара
+
+$(document).on('click', '.delete-param', function (e) {
+    var fake = $(this).data('fake');
+    if (!fake) {
+        var paramId = $(this).data('id');
+        var product = $(this).data('product');
+        $.post('/admin/product_parameters/delete',
+            {'product':product, 'param':paramId},
+            function (){},
+            'json'
+        );
+    }
+    $(this).closest('.param-item').remove();
+    e.preventDefault();
+});

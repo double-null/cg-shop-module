@@ -53,7 +53,6 @@ class ProductParameterController extends Controller
 
         if($this->validation()) {
             $model->_save();
-
             $this->redirect('admin/product_parameters');
         } else
             return $this->render('product_parameters/edit.tpl', ['h1' => 'Редактировать: ', 'model' => $model]);
@@ -61,7 +60,13 @@ class ProductParameterController extends Controller
 
     public function actionDelete()
     {
-        ProductParameter::where('id', $_POST['id'])->delete();
+        if ($_POST['param'] && $_POST['product']) {
+            ProductParameter::where('parameter_id', $_POST['param'])
+                ->where('product_id', $_POST['product'])
+                ->delete();
+        } else {
+            ProductParameter::where('id', $_POST['id'])->delete();
+        }
     }
 
     public function setOptions($data)

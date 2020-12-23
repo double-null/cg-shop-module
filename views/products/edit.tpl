@@ -60,10 +60,18 @@
 
         <div id="product-params-list" class="mt-3">
             {foreach $model->parameters as $param}
-                <div class="form-group">
-                    <label for="price">{$param->parameter->name}:</label>
-                    <input type="text" id="photo" class="form-control" name="Params[{$param->id}]"
-                           value="{$param->value}" />
+                <div class="form-group row param-item">
+                    <div class="col-md-11">
+                        <label for="price">{$param->parameter->name}:</label>
+                        <input type="text" id="photo" class="form-control" name="Params[{$param->id}]"
+                               value="{$param->value}" />
+                    </div>
+                    <div class="col-md-1">
+                        <a class="custom-link delete-param" data-id="{$param->parameter->id}" data-product="{$model->id}"
+                           data-fake="0" href="#">
+                            <i class="nav-icon fas fa-trash"></i>
+                        </a>
+                    </div>
                 </div>
             {/foreach}
         </div>
