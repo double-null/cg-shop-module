@@ -89,12 +89,11 @@ class ProductController extends Controller
             'serial' => '#',
             'fields' => [
                 'id' => 'Id',
-                'category_id' => 'Category_id',
-                'mark' => 'Mark',
-                'name' => 'Name',
-                'description' => 'Description',
-                'photo' => 'Photo',
-                'price' => 'Price',
+                'category_id' => 'Категория',
+                'mark' => 'Артикул',
+                'name' => 'Название',
+                'description' => 'Описание',
+                'price' => 'Цена',
             ],
             'baseUri' => 'products'
         ];
