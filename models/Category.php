@@ -11,14 +11,11 @@ class Category extends Model
 
     public $timestamps = false;
 
-    public $fillable = ['name', 'link', 'scanned'];
+    public $fillable = ['name'];
 
     public function _save()
     {
-            $this->name = $_POST["name"];
-            $this->link = $_POST["link"];
-            $this->scanned = $_POST["scanned"];
-
+        $this->name = $_POST["name"];
         $this->save();
     }
 
@@ -31,13 +28,6 @@ class Category extends Model
 
         if($request->name)
             $query->where('name', 'LIKE', "%$request->name%");
-
-        if($request->link)
-            $query->where('link', 'LIKE', "%$request->link%");
-
-        if($request->scanned)
-            $query->where('scanned', 'LIKE', "%$request->scanned%");
-
 
         return $query->get();
     }

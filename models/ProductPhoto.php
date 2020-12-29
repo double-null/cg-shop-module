@@ -1,6 +1,5 @@
 <?php
 
-
 namespace workspace\modules\shop\models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -19,5 +18,18 @@ class ProductPhoto extends Model
         $this->name = $name;
         $this->cover = $cover;
         $this->save();
+    }
+
+    public function deleteAllByProduct($product)
+    {
+        $imagePath = ROOT_DIR.'/images/';
+        $model = $this->where('product_id', $product)->get();
+        foreach ($model as $photo) {
+            $image = $imagePath.$photo->name;
+            if (file_exists($image)) {
+                unlink($image);
+            }
+            $photo->delete();
+        }
     }
 }

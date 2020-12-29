@@ -6,6 +6,7 @@ namespace workspace\modules\shop\controllers;
 use core\App;
 use core\Controller;
 use workspace\modules\shop\models\{Product, Category, ProductParameter};
+use workspace\modules\shop\models\ProductPhoto;
 use workspace\modules\shop\requests\ProductSearchRequest;
 
 class ProductController extends Controller
@@ -39,9 +40,40 @@ class ProductController extends Controller
             $model = new Product();
             $model->_save();
 
+            if (!empty($_FILES['photos'])) {
+                $uploadDir = ROOT_DIR.'/images/';
+                $photos = $_FILES['photos'];
+                $keys = array_keys($photos['name']);
+                foreach ($keys as $key) {
+                    $photos['name'][$key];
+                    $photoNameChunks = explode('.', $photos['name'][$key]);
+                    $photoType = array_pop($photoNameChunks);
+                    do {
+                        $filename = rand(10000, 99999).time().'.'.$photoType;
+                        $newPhoto = $uploadDir.$filename;
+
+                    } while (file_exists($newPhoto));
+                    if (move_uploaded_file($photos['tmp_name'][$key], $newPhoto)) {
+                        (new ProductPhoto)->_save($model->id, $filename,0);
+                    }
+                }
+            }
+            if (!empty($_POST['NewParam'])) {
+                foreach ($_POST['NewParam'] as $key => $paramId) {
+                    if ($_POST['NewParamValue'][$key]) {
+                        ProductParameter::insert([
+                            'product_id' => $model->id,
+                            'parameter_id' => $paramId,
+                            'value' => $_POST['NewParamValue'][$key],
+                        ]);
+                    }
+                }
+            }
             $this->redirect('admin/products');
         } else
-            return $this->render('products/store.tpl', ['h1' => 'Добавить']);
+            return $this->render('products/store.tpl', [
+                'categories' => Category::all(),
+            ]);
     }
 
     public function actionEdit($id)
@@ -80,6 +112,7 @@ class ProductController extends Controller
     public function actionDelete()
     {
         Product::where('id', $_POST['id'])->delete();
+        (new ProductPhoto())->deleteAllByProduct($_POST['id']);
     }
 
     public function setOptions($data)

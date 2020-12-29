@@ -11,10 +11,11 @@ class Product extends Model
 
     public $timestamps = false;
 
-    public $fillable = ['mark', 'name', 'description', 'price'];
+    public $fillable = ['category_id', 'mark', 'name', 'description', 'price'];
 
     public function _save()
     {
+        $this->category_id = $_POST["category_id"];
         $this->mark = $_POST["mark"];
         $this->name = $_POST["name"];
         $this->description = $_POST["description"];
