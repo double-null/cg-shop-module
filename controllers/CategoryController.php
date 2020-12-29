@@ -70,8 +70,6 @@ class CategoryController extends Controller
             'fields' => [
                 'id' => 'Id',
                 'name' => 'Name',
-                'link' => 'Link',
-                'scanned' => 'Scanned',
             ],
             'baseUri' => 'categories'
         ];
@@ -79,6 +77,6 @@ class CategoryController extends Controller
 
    public function validation()
    {
-       return (isset($_POST["name"]) && isset($_POST["link"]) && isset($_POST["scanned"])) ? true : false;
+       return (isset($_POST["name"])) ? true : false;
    }
 }

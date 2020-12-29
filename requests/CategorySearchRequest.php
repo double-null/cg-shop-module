@@ -8,9 +8,6 @@ class CategorySearchRequest extends RequestSearch
 {
     public $id;
     public $name;
-    public $link;
-    public $scanned;
-
 
     public function rules()
     {

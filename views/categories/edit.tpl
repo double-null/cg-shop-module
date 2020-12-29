@@ -9,18 +9,6 @@
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" class="form-control" value="{$model->name}" required="required" />
         </div>
-
-        <div class="form-group">
-            <label for="link">Link:</label>
-            <input type="text" name="link" id="link" class="form-control" value="{$model->link}" required="required" />
-        </div>
-
-        <div class="form-group">
-            <label for="scanned">Scanned:</label>
-            <input type="text" name="scanned" id="scanned" class="form-control" value="{$model->scanned}" required="required" />
-        </div>
-
-
         <div class="form-group">
             <input type="submit" name="submit" id="submit_button" class="btn btn-dark" value="Submit">
         </div>
