@@ -63,9 +63,15 @@ class ShopController extends Controller
         die;
     }
 
-    public function actionRemoveProductFromCart($id)
+    public function actionRemoveProductFromCart()
     {
-        //$product
+        foreach ($_SESSION['cart'] as $key => $product) {
+            if ($product['id'] == $_POST['product']) {
+                unset($_SESSION['cart'][$key]);
+            }
+        }
+        echo json_encode($_SESSION['cart']);
+        die;
     }
 
     public function actionCart()
@@ -73,6 +79,11 @@ class ShopController extends Controller
         return $this->render('shop/cart.tpl', [
             'products' => $_SESSION['cart'],
         ]);
+    }
+
+    public function actionCheckout()
+    {
+        return $this->render('shop/checkout.tpl');
     }
 
     public function setOptions($data)

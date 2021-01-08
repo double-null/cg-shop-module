@@ -11,4 +11,6 @@ $('.add-to-cart').click(function(e){
 $('.remove-from-cart').click(function(e){
     e.preventDefault();
     var product = $(this).data('product');
+    $.post('/shop/remove_from_cart', {'product':product}, function (){}, 'json');
+    $(this).closest('.product-item').remove();
 });

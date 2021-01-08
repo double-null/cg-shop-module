@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                 {foreach $products as $product}
-                    <tr class="text-center">
+                    <tr class="product-item text-center">
                         <td class="product-remove">
                             <a href="#" class="remove-from-cart" data-product="{$product.id}">
                                 <span class="ion-ios-close"></span>
