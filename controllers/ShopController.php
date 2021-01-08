@@ -32,7 +32,6 @@ class ShopController extends Controller
         return $this->render('shop/index.tpl', [
             'products' => $products->toArray(),
             'category' => $category->toArray(),
-            'options' => $this->setOptions($products),
             'totalProducts' => $totalProducts,
             'page' => $page,
         ]);
@@ -100,12 +99,6 @@ class ShopController extends Controller
                 'price' => 'Цена',
             ],
             'baseUri' => '/shop',
-            'pagination'  => [
-                'per_page' => 5,
-                'class' => 'block-27',
-                'class-active' => 'active',
-                'class-control' => '',
-            ]
         ];
     }
 }
