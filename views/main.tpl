@@ -74,9 +74,7 @@
     </div>
 </div>
 
-<section class="ftco-section bg-light">
-    <div class="container-fluid">{$content}</div>
-</section>
+{$content}
 
 <section class="ftco-section-parallax">
     <div class="parallax-img d-flex align-items-center">
