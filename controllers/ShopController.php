@@ -2,11 +2,9 @@
 
 namespace workspace\modules\shop\controllers;
 
-use core\App;
 use core\Controller;
 use workspace\modules\shop\models\Category;
 use workspace\modules\shop\models\Product;
-use workspace\modules\shop\models\ProductPhoto;
 
 class ShopController extends Controller
 {
@@ -16,6 +14,10 @@ class ShopController extends Controller
         $this->layoutPath = '/modules/shop/views/';
         $categories = Category::all()->toArray();
         $this->view->tpl->assign('categories', $categories);
+        $cartSize = (!empty($_SESSION['cart'])) ? count($_SESSION['cart']) : 0;
+        $selectedProducts = $_SESSION['cart'] ?? [];
+        $this->view->tpl->assign('cartSize', $cartSize);
+        $this->view->tpl->assign('selectedProducts', $selectedProducts);
     }
 
     public function actionIndex($page = 1)
@@ -50,33 +52,47 @@ class ShopController extends Controller
 
     public function actionAddProductToCart()
     {
-        $product = Product::with('photos')
-            ->where('id', (int)$_POST['product'])
-            ->first()
-            ->toArray();
-
-        $_SESSION['cart'][] = array_merge($product, [
-            'quantity' => (int)$_POST['quantity'],
+        $selectedProducts = array_column($_SESSION['cart'],'product');
+        if (!empty($_SESSION['cart']) && in_array($_POST['product'], $selectedProducts)) {
+            foreach ($_SESSION['cart'] as $key => $product) {
+                if ($product['product'] == (int)$_POST['product']) {
+                    unset($_SESSION['cart'][$key]);
+                }
+            }
+            $action = 1;
+        } else {
+            $quantity = (!empty($_POST['quantity'])) ? (int)$_POST['quantity'] : 1;
+            $_SESSION['cart'][] = [
+                'product' => (int)$_POST['product'],
+                'quantity' => $quantity,
+            ];
+            $action = 2;
+        }
+        echo json_encode([
+            'cartSize' => count($_SESSION['cart']),
+            'product' => (int)$_POST['product'],
+            'action' => $action,
         ]);
-        echo json_encode(['status' => 1]);
         die;
     }
 
     public function actionRemoveProductFromCart()
     {
         foreach ($_SESSION['cart'] as $key => $product) {
-            if ($product['id'] == $_POST['product']) {
+            if ($product['product'] == $_POST['product']) {
                 unset($_SESSION['cart'][$key]);
             }
         }
-        echo json_encode($_SESSION['cart']);
+        echo json_encode(['cartSize' => count($_SESSION['cart'])]);
         die;
     }
 
     public function actionCart()
     {
+        $selectedProducts = array_column($_SESSION['cart'],'product');
+        $products = Product::find($selectedProducts);
         return $this->render('shop/cart.tpl', [
-            'products' => $_SESSION['cart'],
+            'products' => $products,
         ]);
     }
 

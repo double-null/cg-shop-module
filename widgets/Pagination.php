@@ -36,7 +36,7 @@ class Pagination extends Widget
 
     public function defaultWrapperTpl()
     {
-        return '<div class="block-27"><ul>{buttons}</ul></div>';
+        return '<nav class="block-27"><ul>{buttons}</ul></nav>';
     }
 
     public function defaultButtonTpl()

@@ -41,14 +41,18 @@
                                 </td>
 
                                 <td class="price">{$product.price}</td>
+                                {foreach $selectedProducts as $selectedProduct}
+                                {if $selectedProduct.product == $product.id}
+                                    <td class="quantity">
+                                        <div class="input-group mb-3">
+                                            <input type="text" name="quantity" class="quantity form-control input-number"
+                                                   value="{$selectedProduct.quantity}" min="1" max="100">
+                                        </div>
+                                    </td>
 
-                                <td class="quantity">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="quantity" class="quantity form-control input-number"
-                                               value="{$product.quantity}" min="1" max="100">
-                                    </div>
-                                </td>
-                                <td class="total">{$product.price * $product.quantity}</td>
+                                    <td class="total">{$product.price * $selectedProduct.quantity}</td>
+                                {/if}
+                                {/foreach}
                             </tr>
                         {/foreach}
                         </tbody>
@@ -58,7 +62,7 @@
         </div>
         <div class="row justify-content-end">
             <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
-                <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Оформить заказ</a></p>
+                <p class="text-center"><a href="/shop/checkout" class="btn btn-primary py-3 px-4">Оформить заказ</a></p>
             </div>
         </div>
     </div>

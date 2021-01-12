@@ -6,7 +6,7 @@
 
 <section class="ftco-section bg-light">
     <div class="container">
-        <div class="row">
+        <div id="product-{$product.id}" class="row">
             <div class="col-lg-6 mb-5 ftco-animate fadeInUp ftco-animated">
                 {foreach $product.photos as $photo}
                     {if $photo.cover == 1}
@@ -38,7 +38,14 @@
                         </span>
                     </div>
                 </div>
-                <p><a data-product="{$product.id}" href="#" class="add-to-cart btn btn-primary py-3 px-5">Добавить в корзину</a></p>
+                <p><a data-product="{$product.id}" href="#"
+                      class="add-to-cart btn btn-primary py-3 px-5">
+                        {if in_array($product.id, array_column($selectedProducts,'product'))}
+                        <span class="cart-action">Удалить из корзины</span>
+                    {else}
+                        <span class="cart-action">Добавить в корзину</span>
+                    {/if}
+                </a></p>
             </div>
         </div>
     </div>
