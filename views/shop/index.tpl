@@ -2,6 +2,7 @@
     <span class="mr-2"><a href="/shop/">Главная</a></span>
     <span>{$category.name}</span>
 {/capture}
+
 <section class="ftco-section bg-light">
     <div class="container-fluid">
         <div class="row">
@@ -20,7 +21,7 @@
                             <hr>
                             <p class="bottom-area d-flex">
                                 <a data-product="{$product.id}" href="#" class="add-to-cart">
-                                    {if in_array($product.id, array_column($selectedProducts,'product'))}
+                                    {if in_array($product.id, $selectedProducts)}
                                         <span class="cart-action">
                                             Удалить из корзины
                                         </span>

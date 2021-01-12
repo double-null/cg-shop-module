@@ -7,42 +7,48 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-8 ftco-animate">
-                <form action="#" class="billing-form bg-light p-3 p-md-5">
-                    <h3 class="mb-4 billing-heading">Billing Details</h3>
+                <form method="POST" class="billing-form bg-light p-3 p-md-5">
+                    <h3 class="mb-4 billing-heading">Детали заказа</h3>
                     <div class="row align-items-end">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="firstname">Ваше имя</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" class="form-control" name="name" placeholder="">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="lastname">Фамилия</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" class="form-control" name="surname" placeholder="">
                             </div>
                         </div>
                         <div class="w-100"></div>
-                        <div class="col-md-6">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label for="streetaddress">Адрес</label>
-                                <input type="text" class="form-control" placeholder="House number and street name">
+                                <label for="streetaddress">Адрес доставки</label>
+                                <input type="text" class="form-control" name="delivery_address" placeholder="">
                             </div>
                         </div>
                         <div class="w-100"></div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone">Телефон</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" class="form-control" name="phone" placeholder="">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="emailaddress">Email</label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" class="form-control" name="email" placeholder="">
                             </div>
                         </div>
-                        <p><a href="#" class="btn btn-primary py-3 px-4">Заказать</a></p>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="emailaddress">Комментрарий</label>
+                                <input type="text" class="form-control" name="comment" placeholder="">
+                            </div>
+                        </div>
+                        <p><input type="submit" class="btn btn-primary py-3 px-4" value="Заказать"></p>
                     </div>
                 </form><!-- END -->
             </div> <!-- .col-md-8 -->

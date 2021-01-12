@@ -39,6 +39,14 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a href="/" class="nav-link">Главная</a></li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Категории</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        {foreach $categories as $category}
+                            <a class="dropdown-item" href="/shop/?category={$category.id}">{$category.name}</a>
+                        {/foreach}
+                    </div>
+                </li>
                 <li class="nav-item"><a href="/contacts" class="nav-link">Контакты</a></li>
                 <li class="nav-item cta cta-colored">
                     <a href="/shop/cart/" class="nav-link">
@@ -78,18 +86,16 @@
     <div class="parallax-img d-flex align-items-center">
         <div class="container">
             <div class="row d-flex justify-content-center py-5">
-                <div class="col-md-7 text-center heading-section ftco-animate">
-                    <h1 class="big">Subscribe</h1>
-                    <h2>Subcribe to our Newsletter</h2>
-                    <div class="row d-flex justify-content-center mt-5">
-                        <div class="col-md-8">
-                            <form action="#" class="subscribe-form">
-                                <div class="form-group d-flex">
-                                    <input type="text" class="form-control" placeholder="Enter email address">
-                                    <input type="submit" value="Subscribe" class="submit px-3">
-                                </div>
-                            </form>
-                        </div>
+                <div class="col-md-12 text-center heading-section ftco-animate">
+                    <h1 class="big">Категории</h1>
+                    <h2>Категории</h2>
+                    <div class="row d-flex mt-5">
+                        {foreach $categories as $category}
+                            <div class="col-md-4">
+                                <a href="/shop/?category={$category.id}">{$category.name}</a>
+                            </div>
+
+                        {/foreach}
                     </div>
                 </div>
             </div>

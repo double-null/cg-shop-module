@@ -96,11 +96,6 @@ class ShopController extends Controller
         ]);
     }
 
-    public function actionCheckout()
-    {
-        return $this->render('shop/checkout.tpl');
-    }
-
     public function setOptions($data)
     {
         return [
