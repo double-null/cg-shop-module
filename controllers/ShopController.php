@@ -3,8 +3,8 @@
 namespace workspace\modules\shop\controllers;
 
 use core\Controller;
-use workspace\modules\shop\models\Category;
-use workspace\modules\shop\models\Product;
+use workspace\modules\shop\models\{Category,Product, Order};
+use workspace\modules\shop\requests\OrderCreateRequest;
 
 class ShopController extends Controller
 {
@@ -89,11 +89,24 @@ class ShopController extends Controller
 
     public function actionCart()
     {
+        $_SESSION['cart'] = $_SESSION['cart'] ?? [];
         $selectedProducts = array_column($_SESSION['cart'],'product');
         $products = Product::find($selectedProducts);
         return $this->render('shop/cart.tpl', [
             'products' => $products,
         ]);
+    }
+
+    public function actionCheckout()
+    {
+        $request = new OrderCreateRequest();
+        if ($request->isPost() && $request->validate()) {
+
+            (new Order)->_save();
+            unset($_SESSION['cart']);
+            $this->view->tpl->assign('success', 1);
+        }
+        return $this->render('shop/checkout.tpl', ['errors' => $request->getMessagesArray()]);
     }
 
     public function setOptions($data)

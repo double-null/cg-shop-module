@@ -7,6 +7,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-8 ftco-animate">
+                {if !empty($success)}
+                    <div class="alert alert-success" role="alert">Заказ оформлен успешно</div>
+                {/if}
+                {if !empty($errors)}
+                    {foreach from=$errors item=error}
+                        <div class="alert alert-danger" role="alert">
+                            {$error}
+                        </div>
+                    {/foreach}
+                {/if}
                 <form method="POST" class="billing-form bg-light p-3 p-md-5">
                     <h3 class="mb-4 billing-heading">Детали заказа</h3>
                     <div class="row align-items-end">

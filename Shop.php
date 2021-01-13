@@ -26,6 +26,10 @@ class Shop
                         'title' => 'Характеристики',
                         'url' => '/admin/parameters',
                     ],
+                    [
+                        'title' => 'Заказы',
+                        'url' => '/admin/orders'
+                    ],
                 ],
             ],
         ];

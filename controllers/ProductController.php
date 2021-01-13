@@ -24,7 +24,9 @@ class ProductController extends Controller
     {
         $request = new ProductSearchRequest();
         $model = Product::search($request);
-        return $this->render('products/index.tpl', ['h1' => 'Product', 'options' => $this->setOptions($model)]);
+        return $this->render('products/index.tpl',
+            ['h1' => 'Product', 'options' => $this->setOptions($model)]
+        );
     }
 
     public function actionView($id)

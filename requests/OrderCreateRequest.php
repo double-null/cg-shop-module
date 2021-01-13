@@ -27,4 +27,14 @@ class OrderCreateRequest extends Request
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'name' => 'Поле Имя обязательно для заполнения',
+            'surname' => 'Поле Фамилия обязательно для заполнения',
+            'delivery_address' => 'Не указан адрес доставки',
+            'phone' => 'Телефон не указан',
+            'email' => 'Email введен не корректно',
+        ];
+    }
 }

@@ -15,7 +15,8 @@ class Orders extends Migration
             $table->string('delivery_address', 250)->comment('Адрес доставки');
             $table->string('phone', 15)->comment('Телефон');
             $table->string('email', 100)->comment('Email');
-            $table->text('comment', 100)->comment('Комментрарий');
+            $table->text('comment')->comment('Комментрарий');
+            $table->text('products')->comment('Товары заказа');
             $table->tinyInteger('status');
         });
     }

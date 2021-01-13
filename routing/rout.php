@@ -35,6 +35,8 @@ App::$collector->group(['before' => 'auth'], function ($router){
             'workspace\modules\shop\controllers\ParameterController', 'actionGetProductParams',
         ]);
 
+        App::$collector->gridView('/orders', ['workspace\modules\shop\controllers\OrderController']);
+
     });
 });
 
@@ -54,4 +56,4 @@ App::$collector->post('shop/remove_from_cart', ['workspace\modules\Shop\controll
 
 App::$collector->get('shop/cart', ['workspace\modules\Shop\controllers\ShopController', 'actionCart']);
 
-App::$collector->any('shop/checkout', ['workspace\modules\Shop\controllers\OrderController', 'actionCreate']);
+App::$collector->any('shop/checkout', ['workspace\modules\Shop\controllers\ShopController', 'actionCheckout']);
