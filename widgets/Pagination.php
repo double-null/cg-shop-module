@@ -4,6 +4,10 @@ namespace workspace\modules\shop\widgets;
 
 use core\Widget;
 
+/**
+ * Class Pagination
+ * @package workspace\modules\shop\widgets
+ */
 class Pagination extends Widget
 {
     protected $totalPage = 1;
@@ -34,26 +38,41 @@ class Pagination extends Widget
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function defaultWrapperTpl()
     {
         return '<nav class="block-27"><ul>{buttons}</ul></nav>';
     }
 
+    /**
+     * @return string
+     */
     public function defaultButtonTpl()
     {
         return '<li><a href="{url}{page}">{display_page}</a></li>';
     }
 
+    /**
+     * @return string
+     */
     public function defaultCurrentPageTpl()
     {
         return '<li class="active"><span>{page}</span></li>';
     }
 
+    /**
+     * @return string
+     */
     public function defaultSeparateTpl()
     {
         return '<span>..</span>';
     }
 
+    /**
+     *
+     */
     public function run()
     {
         $btnTpl = ($this->buttonTemplate) ?? $this->defaultButtonTpl();

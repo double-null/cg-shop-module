@@ -4,6 +4,10 @@ namespace workspace\modules\shop\models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class ProductPhoto
+ * @package workspace\modules\shop\models
+ */
 class ProductPhoto extends Model
 {
     protected $table = "product_photos";
@@ -12,6 +16,11 @@ class ProductPhoto extends Model
 
     public $fillable = ['product_id', 'name', 'cover'];
 
+    /**
+     * @param $productId
+     * @param $name
+     * @param $cover
+     */
     public function _save($productId, $name, $cover)
     {
         $this->product_id = $productId;
@@ -20,6 +29,9 @@ class ProductPhoto extends Model
         $this->save();
     }
 
+    /**
+     * @param $product
+     */
     public function deleteAllByProduct($product)
     {
         $imagePath = ROOT_DIR.'/images/';

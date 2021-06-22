@@ -4,6 +4,10 @@ namespace workspace\modules\shop\requests;
 
 use core\RequestSearch;
 
+/**
+ * Class ProductSearchRequest
+ * @package workspace\modules\shop\requests
+ */
 class ProductSearchRequest extends RequestSearch
 {
     public $id;
@@ -13,7 +17,9 @@ class ProductSearchRequest extends RequestSearch
     public $description;
     public $price;
 
-
+    /**
+     * @return array
+     */
     public function rules()
     {
         return [];

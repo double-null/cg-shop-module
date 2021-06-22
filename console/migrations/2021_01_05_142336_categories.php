@@ -4,10 +4,11 @@ use core\App;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-
+/**
+ * Class Categories
+ */
 class Categories extends Migration
 {
-
     public function up()
     {
         App::$db->schema->create('categories', function (Blueprint $table) {
@@ -18,6 +19,6 @@ class Categories extends Migration
 
     public function down()
     {
-        //
+
     }
 }

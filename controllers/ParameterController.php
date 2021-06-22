@@ -7,8 +7,15 @@ use core\Controller;
 use workspace\modules\shop\models\Parameter;
 use workspace\modules\shop\requests\ParameterSearchRequest;
 
+/**
+ * Class ParameterController
+ * @package workspace\modules\shop\controllers
+ */
 class ParameterController extends Controller
 {
+    /**
+     *
+     */
     protected function init()
     {
         $this->viewPath = '/modules/shop/views/';
@@ -17,6 +24,9 @@ class ParameterController extends Controller
         App::$breadcrumbs->addItem(['text' => 'Список характеристик', 'url' => 'admin/parameters']);
     }
 
+    /**
+     * @return mixed
+     */
     public function actionIndex()
     {
         $request = new ParameterSearchRequest();
@@ -25,6 +35,10 @@ class ParameterController extends Controller
         return $this->render('parameters/index.tpl', ['h1' => 'Список характеристик', 'options' => $this->setOptions($model)]);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function actionView($id)
     {
         $model = Parameter::where('id', $id)->first();
@@ -34,6 +48,9 @@ class ParameterController extends Controller
         return $this->render('parameters/view.tpl', ['model' => $model, 'options' => $options]);
     }
 
+    /**
+     * @return mixed
+     */
     public function actionStore()
     {
         if($this->validation()) {
@@ -44,6 +61,10 @@ class ParameterController extends Controller
             return $this->render('parameters/store.tpl', ['h1' => 'Добавить']);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function actionEdit($id)
     {
         $model = Parameter::where('id', $id)->first();
@@ -56,17 +77,27 @@ class ParameterController extends Controller
             return $this->render('parameters/edit.tpl', ['h1' => 'Редактировать: ', 'model' => $model]);
     }
 
+    /**
+     *
+     */
     public function actionDelete()
     {
         Parameter::where('id', $_POST['id'])->delete();
     }
 
+    /**
+     *
+     */
     public function actionGetProductParams()
     {
         echo json_encode(Parameter::all()->toArray());
         die;
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     public function setOptions($data)
     {
         return [
@@ -82,6 +113,9 @@ class ParameterController extends Controller
         ];
    }
 
+    /**
+     * @return bool
+     */
    public function validation()
    {
        return (isset($_POST["name"]) && isset($_POST["type"]) && isset($_POST["unit"])) ? true : false;

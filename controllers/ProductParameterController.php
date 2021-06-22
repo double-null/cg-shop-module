@@ -9,8 +9,15 @@ use core\Controller;
 use workspace\modules\shop\models\ProductParameter;
 use workspace\modules\shop\requests\ProductParameterSearchRequest;
 
+/**
+ * Class ProductParameterController
+ * @package workspace\modules\shop\controllers
+ */
 class ProductParameterController extends Controller
 {
+    /**
+     *
+     */
     protected function init()
     {
         $this->viewPath = '/modules/shop/views/';
@@ -19,6 +26,9 @@ class ProductParameterController extends Controller
         App::$breadcrumbs->addItem(['text' => 'Характеристики товара', 'url' => 'admin/product_parameters']);
     }
 
+    /**
+     * @return mixed
+     */
     public function actionIndex()
     {
         $request = new ProductParameterSearchRequest();
@@ -27,6 +37,10 @@ class ProductParameterController extends Controller
         return $this->render('product_parameters/index.tpl', ['h1' => 'Характеристики товара', 'options' => $this->setOptions($model)]);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function actionView($id)
     {
         $model = ProductParameter::where('id', $id)->first();
@@ -36,6 +50,9 @@ class ProductParameterController extends Controller
         return $this->render('product_parameters/view.tpl', ['model' => $model, 'options' => $options]);
     }
 
+    /**
+     * @return mixed
+     */
     public function actionStore()
     {
         if($this->validation()) {
@@ -47,6 +64,10 @@ class ProductParameterController extends Controller
             return $this->render('product_parameters/store.tpl', ['h1' => 'Добавить']);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function actionEdit($id)
     {
         $model = ProductParameter::where('id', $id)->first();
@@ -58,6 +79,9 @@ class ProductParameterController extends Controller
             return $this->render('product_parameters/edit.tpl', ['h1' => 'Редактировать: ', 'model' => $model]);
     }
 
+    /**
+     *
+     */
     public function actionDelete()
     {
         if ($_POST['param'] && $_POST['product']) {
@@ -69,6 +93,10 @@ class ProductParameterController extends Controller
         }
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     public function setOptions($data)
     {
         return [
@@ -84,6 +112,9 @@ class ProductParameterController extends Controller
         ];
    }
 
+    /**
+     * @return bool
+     */
    public function validation()
    {
        return (isset($_POST["product_id"]) && isset($_POST["parametr_id"]) && isset($_POST["value"])) ? true : false;

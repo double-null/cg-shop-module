@@ -5,6 +5,10 @@ namespace workspace\modules\shop\models;
 use Illuminate\Database\Eloquent\Model;
 use workspace\modules\shop\requests\ProductSearchRequest;
 
+/**
+ * Class Product
+ * @package workspace\modules\shop\models
+ */
 class Product extends Model
 {
     protected $table = "products";
@@ -13,6 +17,9 @@ class Product extends Model
 
     public $fillable = ['category_id', 'mark', 'name', 'description', 'price'];
 
+    /**
+     *
+     */
     public function _save()
     {
         $this->category_id = $_POST["category_id"];
@@ -23,6 +30,10 @@ class Product extends Model
         $this->save();
     }
 
+    /**
+     * @param ProductSearchRequest $request
+     * @return mixed
+     */
     public static function search(ProductSearchRequest $request)
     {
         $query = self::query();
@@ -45,16 +56,25 @@ class Product extends Model
         return $query->get();
     }
 
+    /**
+     * @return mixed
+     */
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function parameters()
     {
         return $this->hasMany(ProductParameter::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function photos()
     {
         return $this->hasMany(ProductPhoto::class);

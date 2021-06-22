@@ -4,6 +4,9 @@ use core\App;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+/**
+ * Class ProductParameters
+ */
 class ProductParameters extends Migration
 {
 

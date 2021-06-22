@@ -8,8 +8,15 @@ use workspace\modules\shop\models\Order;
 use workspace\modules\shop\models\Product;
 use workspace\modules\shop\requests\OrderSearchRequest;
 
+/**
+ * Class OrderController
+ * @package workspace\modules\shop\controllers
+ */
 class OrderController extends Controller
 {
+    /**
+     *
+     */
     protected function init()
     {
         $this->viewPath = '/modules/shop/views/';
@@ -18,6 +25,9 @@ class OrderController extends Controller
         App::$breadcrumbs->addItem(['text' => 'Заказы', 'url' => 'admin/orders']);
     }
 
+    /**
+     * @return mixed
+     */
     public function actionIndex()
     {
         $request = new OrderSearchRequest();
@@ -26,6 +36,10 @@ class OrderController extends Controller
         return $this->render('orders/index.tpl', ['h1' => 'Список заказов', 'options' => $this->setOptions($model)]);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function actionView($id)
     {
         $model = Order::where('id', $id)->first();
@@ -38,6 +52,9 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * @return mixed
+     */
     public function actionStore()
     {
         if($this->validation()) {
@@ -49,6 +66,10 @@ class OrderController extends Controller
             return $this->render('orders/store.tpl', ['h1' => 'Добавить']);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function actionEdit($id)
     {
         $model = Order::where('id', $id)->first();
@@ -61,11 +82,18 @@ class OrderController extends Controller
             return $this->render('orders/edit.tpl', ['h1' => 'Редактировать: ', 'model' => $model]);
     }
 
+    /**
+     *
+     */
     public function actionDelete()
     {
         Order::where('id', $_POST['id'])->delete();
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     public function setOptions($data)
     {
         return [
@@ -86,6 +114,9 @@ class OrderController extends Controller
         ];
     }
 
+    /**
+     * @return bool
+     */
     public function validation()
     {
         return (isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["delivery_address"]) && isset($_POST["phone"]) && isset($_POST["email"]) && isset($_POST["comment"]) && isset($_POST["products"]) && isset($_POST["status"])) ? true : false;

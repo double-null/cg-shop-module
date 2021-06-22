@@ -4,8 +4,15 @@ namespace workspace\modules\shop;
 
 use core\App;
 
+/**
+ * Class Shop
+ * @package workspace\modules\shop
+ */
 class Shop
 {
+    /**
+     *
+     */
     public static function run()
     {
         $config['adminLeftMenu'] = [

@@ -5,6 +5,10 @@ namespace workspace\modules\shop\models;
 use Illuminate\Database\Eloquent\Model;
 use workspace\modules\shop\requests\CategorySearchRequest;
 
+/**
+ * Class Category
+ * @package workspace\modules\shop\models
+ */
 class Category extends Model
 {
     protected $table = "categories";
@@ -13,12 +17,19 @@ class Category extends Model
 
     public $fillable = ['name'];
 
+    /**
+     *
+     */
     public function _save()
     {
         $this->name = $_POST["name"];
         $this->save();
     }
 
+    /**
+     * @param CategorySearchRequest $request
+     * @return mixed
+     */
     public static function search(CategorySearchRequest $request)
     {
         $query = self::query();

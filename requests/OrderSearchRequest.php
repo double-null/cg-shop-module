@@ -32,7 +32,9 @@ class OrderSearchRequest extends RequestSearch
     public $products;
     public $status;
 
-
+    /**
+     * @return array
+     */
     public function rules()
     {
         return [];

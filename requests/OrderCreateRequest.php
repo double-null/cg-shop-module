@@ -5,6 +5,10 @@ namespace workspace\modules\shop\requests;
 
 use core\Request;
 
+/**
+ * Class OrderCreateRequest
+ * @package workspace\modules\shop\requests
+ */
 class OrderCreateRequest extends Request
 {
     public $name;
@@ -15,6 +19,9 @@ class OrderCreateRequest extends Request
     public $comment;
     //public $status = 0;
 
+    /**
+     * @return string[]
+     */
     public function rules()
     {
         return [
@@ -27,6 +34,9 @@ class OrderCreateRequest extends Request
         ];
     }
 
+    /**
+     * @return string[]
+     */
     public function messages()
     {
         return [

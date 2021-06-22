@@ -4,9 +4,11 @@ use core\App;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
+/**
+ * Class Parameters
+ */
 class Parameters extends Migration
 {
-
     public function up()
     {
         App::$db->schema->create('parameters', function (Blueprint $table) {

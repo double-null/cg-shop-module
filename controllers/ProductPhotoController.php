@@ -8,6 +8,9 @@ use workspace\modules\shop\models\ProductPhoto;
 
 class ProductPhotoController extends Controller
 {
+    /**
+     *
+     */
     public function actionIndex()
     {
         $photos = ProductPhoto::select(['id', 'name', 'cover'])
@@ -18,6 +21,9 @@ class ProductPhotoController extends Controller
         die;
     }
 
+    /**
+     *
+     */
     public function actionLoad()
     {
         $uploadDir = ROOT_DIR.'/images/';
@@ -37,6 +43,9 @@ class ProductPhotoController extends Controller
         die;
     }
 
+    /**
+     *
+     */
     public function actionDelete()
     {
         ProductPhoto::where('id', $_POST['id'])->delete();

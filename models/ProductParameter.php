@@ -5,6 +5,10 @@ namespace workspace\modules\shop\models;
 use Illuminate\Database\Eloquent\Model;
 use workspace\modules\shop\requests\ProductParameterSearchRequest;
 
+/**
+ * Class ProductParameter
+ * @package workspace\modules\shop\models
+ */
 class ProductParameter extends Model
 {
     protected $table = "product_parameters";
@@ -13,6 +17,9 @@ class ProductParameter extends Model
 
     public $fillable = ['product_id', 'parameter_id', 'value'];
 
+    /**
+     *
+     */
     public function _save()
     {
         $this->product_id = $_POST["product_id"];
@@ -21,6 +28,10 @@ class ProductParameter extends Model
         $this->save();
     }
 
+    /**
+     * @param ProductParameterSearchRequest $request
+     * @return mixed
+     */
     public static function search(ProductParameterSearchRequest $request)
     {
         $query = self::query();
@@ -40,6 +51,9 @@ class ProductParameter extends Model
         return $query->get();
     }
 
+    /**
+     * @return mixed
+     */
     public function parameter()
     {
         return $this->belongsTo(Parameter::class, 'parameter_id', 'id');

@@ -9,8 +9,15 @@ use workspace\modules\shop\models\{Product, Category, ProductParameter};
 use workspace\modules\shop\models\ProductPhoto;
 use workspace\modules\shop\requests\ProductSearchRequest;
 
+/**
+ * Class ProductController
+ * @package workspace\modules\shop\controllers
+ */
 class ProductController extends Controller
 {
+    /**
+     *
+     */
     protected function init()
     {
         $this->viewPath = '/modules/shop/views/';
@@ -20,6 +27,9 @@ class ProductController extends Controller
         $this->view->registerJs('/workspace/modules/shop/resources/js/custom.js', [], true);
     }
 
+    /**
+     * @return mixed
+     */
     public function actionIndex()
     {
         $request = new ProductSearchRequest();
@@ -29,6 +39,10 @@ class ProductController extends Controller
         );
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function actionView($id)
     {
         $model = Product::where('id', $id)->first();
@@ -36,6 +50,9 @@ class ProductController extends Controller
         return $this->render('products/view.tpl', ['model' => $model, 'options' => $options]);
     }
 
+    /**
+     * @return mixed
+     */
     public function actionStore()
     {
         if($this->validation()) {
@@ -78,6 +95,10 @@ class ProductController extends Controller
             ]);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function actionEdit($id)
     {
         $model = Product::where('id', $id)->first();
@@ -111,12 +132,19 @@ class ProductController extends Controller
         }
     }
 
+    /**
+     *
+     */
     public function actionDelete()
     {
         Product::where('id', $_POST['id'])->delete();
         (new ProductPhoto())->deleteAllByProduct($_POST['id']);
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     public function setOptions($data)
     {
         return [
@@ -134,6 +162,9 @@ class ProductController extends Controller
         ];
    }
 
+    /**
+     * @return bool
+     */
    public function validation()
    {
        return (isset($_POST["category_id"]) && isset($_POST["mark"]) && isset($_POST["name"]) && isset($_POST["description"]) && isset($_POST["price"])) ? true : false;

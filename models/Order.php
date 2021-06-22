@@ -5,6 +5,10 @@ namespace workspace\modules\shop\models;
 use Illuminate\Database\Eloquent\Model;
 use workspace\modules\shop\requests\OrderSearchRequest;
 
+/**
+ * Class Order
+ * @package workspace\modules\shop\models
+ */
 class Order extends Model
 {
     protected $table = "orders";
@@ -13,6 +17,9 @@ class Order extends Model
 
     public $fillable = ['name', 'surname', 'delivery_address', 'phone', 'email', 'comment', 'status'];
 
+    /**
+     *
+     */
     public function _save()
     {
         $this->name = $_POST['name'];
@@ -26,6 +33,10 @@ class Order extends Model
         $this->save();
     }
 
+    /**
+     * @param OrderSearchRequest $request
+     * @return mixed
+     */
     public static function search(OrderSearchRequest $request)
     {
         $query = self::query();
@@ -56,7 +67,6 @@ class Order extends Model
 
         if($request->status)
             $query->where('status', 'LIKE', "%$request->status%");
-
 
         return $query->get();
     }

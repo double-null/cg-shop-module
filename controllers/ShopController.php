@@ -6,8 +6,15 @@ use core\Controller;
 use workspace\modules\shop\models\{Category,Product, Order};
 use workspace\modules\shop\requests\OrderCreateRequest;
 
+/**
+ * Class ShopController
+ * @package workspace\modules\shop\controllers
+ */
 class ShopController extends Controller
 {
+    /**
+     *
+     */
     protected function init()
     {
         $this->viewPath = '/modules/shop/views/';
@@ -20,6 +27,10 @@ class ShopController extends Controller
         $this->view->tpl->assign('selectedProducts', $selectedProducts);
     }
 
+    /**
+     * @param int $page
+     * @return mixed
+     */
     public function actionIndex($page = 1)
     {
         $category_id = (int)($_GET['category'] ?? 1);
@@ -39,6 +50,10 @@ class ShopController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function actionView($id)
     {
         $product = Product::with('photos')
@@ -50,6 +65,9 @@ class ShopController extends Controller
         ]);
     }
 
+    /**
+     *
+     */
     public function actionAddProductToCart()
     {
         $selectedProducts = array_column($_SESSION['cart'],'product');
@@ -76,6 +94,9 @@ class ShopController extends Controller
         die;
     }
 
+    /**
+     *
+     */
     public function actionRemoveProductFromCart()
     {
         foreach ($_SESSION['cart'] as $key => $product) {
@@ -87,6 +108,9 @@ class ShopController extends Controller
         die;
     }
 
+    /**
+     * @return mixed
+     */
     public function actionCart()
     {
         $_SESSION['cart'] = $_SESSION['cart'] ?? [];
@@ -97,6 +121,9 @@ class ShopController extends Controller
         ]);
     }
 
+    /**
+     * @return mixed
+     */
     public function actionCheckout()
     {
         $request = new OrderCreateRequest();
@@ -109,6 +136,10 @@ class ShopController extends Controller
         return $this->render('shop/checkout.tpl', ['errors' => $request->getMessagesArray()]);
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     public function setOptions($data)
     {
         return [
